@@ -1,0 +1,83 @@
+@import "tailwindcss";
+@import "@fontsource-variable/playfair-display";
+
+/* ───────── Coy design tokens ───────── */
+:root {
+  --ivory: #fbf7f2;
+  --ivory-deep: #f3ece3;
+  --card: #fffdfa;
+  --ink: #211e1c;
+  --ink-soft: #5d5651;
+  --ink-faint: #8f8780;
+  --line: #e9e1d7;
+  --rose: #c4606b;
+  --rose-deep: #a84853;
+  --rose-soft: #f6e3e2;
+  --sage: #6f8a78;
+  --blush: #fbe9e7;
+  --blush-deep: #f6d5d2;
+}
+
+@theme inline {
+  --color-ivory: var(--ivory);
+  --color-ivory-deep: var(--ivory-deep);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-rose: var(--rose);
+  --color-rose-deep: var(--rose-deep);
+  --color-rose-soft: var(--rose-soft);
+  --color-sage: var(--sage);
+  --color-blush: var(--blush);
+  --color-blush-deep: var(--blush-deep);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display Variable", "Playfair Display", Georgia, serif;
+
+  --radius-card: 2rem;
+  --radius-chip: 999px;
+
+  --shadow-soft: 0 1px 2px rgb(33 30 28 / 0.04), 0 8px 24px -8px rgb(33 30 28 / 0.1);
+  --shadow-lift: 0 2px 4px rgb(33 30 28 / 0.05), 0 24px 48px -16px rgb(33 30 28 / 0.22);
+}
+
+html {
+  background: var(--ivory);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
