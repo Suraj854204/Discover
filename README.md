@@ -56,44 +56,6 @@ src/
 drizzle/          generated SQL migrations
 tests/            backend (matching, api) and ui/ tests
 docs/             PRODUCT_RECOMMENDATIONS.md
-```
-
-## Installation
-
-Requires Node.js 20.6+ and a PostgreSQL database (a free [Neon](https://neon.tech) project works).
-
-```bash
-npm install
-cp .env.example .env     # then paste your Neon connection string into DATABASE_URL
-npm run db:setup         # applies migrations + seeds 32 profiles
-npm run dev              # http://localhost:3000
-```
-
-## Environment setup
-
-One variable in `.env`:
-
-```
-DATABASE_URL="postgresql://USER:PASSWORD@HOST/DBNAME?sslmode=require"
-```
-
-On Neon, copy the connection string from the dashboard (the pooled one is fine). `.env` is git-ignored; never commit it. If you see a connection timeout, check VPN / firewall / Wi-Fi restrictions, and note that a sleeping free Neon database can take a few seconds on the first request.
-
-## Database
-
-- Change the schema in `src/db/schema.ts`, then run `npm run db:generate` to create a new migration in `drizzle/`.
-- `npm run db:migrate` applies migrations; `npm run db:seed` wipes and re-seeds (reproducible: fixed IDs `p01`–`p32`); `npm run db:setup` does both; `npm run db:reset` re-seeds so you can swipe from scratch.
-
-## Development commands
-
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Dev server |
-| `npm run build` / `npm start` | Production build / serve |
-| `npm run lint` | ESLint |
-| `npm run typecheck` | `tsc --noEmit` |
-| `npm test` | Vitest (runs against an in-memory Postgres, PGlite; no database needed) |
-
 ## API
 
 All responses are JSON with `success: true | false`. Errors look like `{ "success": false, "error": { "code", "message" } }`.
@@ -121,17 +83,6 @@ Body: `{ "profileId": "p01", "action": "like" | "pass" }`
 4. Every swipe body is validated with Zod; unknown profile IDs return a uniform 404, duplicates a 409.
 5. Responses are sent with `Cache-Control: no-store`.
 
-## Testing
-
-```bash
-npm test
-```
-
-41 tests: backend, landing, dashboard (feed exclusion, like/pass persistence, mutual vs one-sided, duplicates, privacy of payloads, HTTP status codes) and UI (card rendering, like/pass, duplicate-submit guard, keyboard, empty/error states, match dialog, Matches view). The UI tests mock `fetch`; drag gestures are not covered by automated tests.
-
-## Screenshots
-
-_Not included yet._ Run the app and add captures of Discover, the match dialog and Matches here.
 
 ## Known limitations
 
